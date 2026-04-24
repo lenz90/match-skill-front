@@ -2,11 +2,13 @@ import { UserRole } from '../../types'
 
 interface SidebarProps {
   role: UserRole
+  userName: string
+  userEmail: string
   onNavigateDashboard: () => void
-  onBackToLogin: () => void
+  onSignOut: () => void
 }
 
-export function Sidebar({ role, onNavigateDashboard, onBackToLogin }: SidebarProps) {
+export function Sidebar({ role, userName, userEmail, onNavigateDashboard, onSignOut }: SidebarProps) {
   const items =
     role === 'MANAGER'
       ? ['Dashboard', 'Requirements', 'Consultants', 'Matching Insights']
@@ -27,11 +29,17 @@ export function Sidebar({ role, onNavigateDashboard, onBackToLogin }: SidebarPro
           </button>
         ))}
       </div>
+
+      <div className="mt-8 rounded-lg border border-slate-700 bg-slate-800/50 p-3 text-xs">
+        <p className="font-semibold">{userName}</p>
+        <p className="truncate text-slate-300">{userEmail}</p>
+      </div>
+
       <button
-        onClick={onBackToLogin}
-        className="mt-8 w-full rounded-md border border-slate-700 px-3 py-2 text-sm hover:bg-slate-800"
+        onClick={onSignOut}
+        className="mt-3 w-full rounded-md border border-slate-700 px-3 py-2 text-sm hover:bg-slate-800"
       >
-        Switch role
+        Sign out
       </button>
     </aside>
   )
